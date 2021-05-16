@@ -4,7 +4,7 @@ Este código coleta dados de ações selecionadas da Bovespa e faz uma análise 
 O arquivo de entrada (tickers.dat) que contém os tickers de ações não tem ações financeiras como bancos e seguradoras, nem BDRs. Sinta-se à vontade para editá-lo e excluir ou incluir qualquer ação desejada.
 
 Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código com um único objetivo, o de compartilhar o conhecimento.
-Qualque dúvida ou sugestão de site me mande um e-mail: cammneto@gmail.com
+Qualquer dúvida ou sugestão de site me mande um e-mail: cammneto@gmail.com
 
 ########################################################################################################################################################################################
 
