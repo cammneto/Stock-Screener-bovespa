@@ -6,7 +6,7 @@ O arquivo de entrada (tickers.dat) que contém os tickers de ações não tem a�
 Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código com um único objetivo, o de compartilhar o conhecimento.
 Qualquer dúvida ou sugestão de site me mande um e-mail: cammneto@gmail.com
 
-########################################################################################################################################################################################
+#################################################################################################################
 
 This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume less than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies, nor BDRs. Feel free to edit it and delete or include any desired actions.
 
