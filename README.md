@@ -8,7 +8,7 @@ Use-o por sua conta e risco e não faça nenhum investimento se não souber o qu
 Para cada site temos um código separados em pastas e com exemplos dos outputs tanto do screener quanto do "deep value". Para dúvidas ou sugestões de site mande e-mail para: cammneto@gmail.com
 Sites de indicadores disponíveis:
 
-statusinvest.com.br
+wwww.statusinvest.com.br
 
 fundamentus.com.br
 
