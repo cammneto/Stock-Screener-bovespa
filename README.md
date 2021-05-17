@@ -3,7 +3,6 @@
 Este código coleta dados de ações selecionadas da Bovespa e faz uma análise baseada na "deep value investing", criada por Benjamin Graham (mentor de Warren Buffett) explicada no livro The Intelligent Investor, muito utilizada pelo próprio Buffett e por Walter Schloss, dois dos maiores investidores de todos os tempos. O código clasifica as ações por EV/EBIT em ordem crescente e exclui margem EBIT negativa e volume financeiro menor q 200 mil.
 O arquivo de entrada (tickers.dat) que contém os tickers de ações não tem ações financeiras como bancos e seguradoras, nem BDRs. Sinta-se à vontade para editá-lo e excluir ou incluir qualquer ação desejada.
 
-<<<<<<< HEAD
 Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código apenas com o objetivo de compartilhar o conhecimento.
 
 Para cada site temos um código separados em pastas e com exemplos dos outputs tanto do screener quanto do "deep value". Para dúvidas ou sugestões de site mande e-mail para: cammneto@gmail.com
@@ -11,13 +10,8 @@ Sites de indicadores disponíveis:
 -statusinvest.com.br
 -fundamentus.com.br
 -investsite.com.br
-########################################################################################################################################################################################
-=======
-Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código com um único objetivo, o de compartilhar o conhecimento.
-Qualquer dúvida ou sugestão de site me mande um e-mail: cammneto@gmail.com
 
 #################################################################################################################
->>>>>>> 787ce2d46c5eba64c140a06186ba80ff548ce092
 
 This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume less than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies, nor BDRs. Feel free to edit it and delete or include any desired actions.
 
