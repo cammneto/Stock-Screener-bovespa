@@ -31,7 +31,7 @@ df=df.reset_index(drop=True)
 # Print first 50 rows
 print(df.head(50))
 # Save data to a csv file
-df.to_csv('output-deepvalue.csv',index=False)
+df.to_csv('status_invest_deepvalue.csv',index=False)
 # Write a backup csv file with current date
 today = str(datetime.datetime.now().date())
-df.to_csv('deepvalue-output-' + today + ".csv",index=False)
+df.to_csv('status_invest_deepvalue-' + today + ".csv",index=False)

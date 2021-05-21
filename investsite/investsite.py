@@ -1,8 +1,9 @@
 import pandas as pd
 import requests
 import datetime
+import shutil
 
-# Import stocks for searching
+# Read Stocks file for searching
 def ticker(InputFile):
     infile = open(InputFile, "r")
     tickers = [line.split() for line in infile]
@@ -12,42 +13,74 @@ def ticker(InputFile):
     return ticker
 
 # Scrap data from url
-def frame(i,ticker):
-    print('Scraping data for', ticker, 'from investsite.com.br','\n')
+def page_tables(ticker):
     url = 'https://www.investsite.com.br/principais_indicadores.php?cod_negociacao='+ticker
-    html = requests.get(url).content
+    page = requests.get(url)
     # Get all the tables from the html content
-    tables = pd.read_html(html)
-    # Separate tables from html
-    db = [tables[1][0],tables[1][1]]   # Dados Básicos
-    pr = [tables[2][0],tables[2][1]]   # Precos Relativos
-    dre= [tables[3][0],tables[3][1]]   # DRE 12 meses
-    vol= [tables[5][0],tables[5][1]]   # Volume Diário (média 90 dias)
-    outros=[tables[6][0],tables[6][1]] # Outros Indicadores
-    # Arrange desired values in a list
-    linha=[db[1][0],db[1][6],db[1][9],pr[1][9],outros[1][6],vol[1][12],db[1][3]]
-    print(ticker,'DONE')
-    print('##########################################################')
-    return linha
+    for p in page:
+     try:
+         tables = pd.read_html(page.content)
+         return tables
+     except ValueError:
+         pass
 
 # call stocks tickers from the file
-tickers=ticker('tickers.dat')
-rows=[]
-number = len(tickers)
-
-for i in range(number):
-    print('Searching for stock', i, 'out of', number, 'Stocks','\n')
-    ticker=tickers[i]
-    rows.append(frame(i,ticker))
-
-# Create a header for the data frame
-header = ['Empresa', 'Ticker', 'Cotação', 'EV/EBIT', 'Margem EBIT', 'Volume Diário', 'Situação']
+stocks=ticker('tickers.dat')
+names,tickers,price,evebit,m_ebit,volume,sit=[],[],[],[],[],[],[]
+for i in range(len(stocks)):
+    print('Scraping',i+1, 'out of', len(stocks),'from: investsite.com.br')
+    tables = page_tables(stocks[i])
+    if tables==None:
+        print(tables)
+        print('Ativo:',stocks[i])
+        print('ERR 404: STOCK NOT FOUND')
+        print('\n############################################################\n')
+        pass
+    else:
+        # Separate tables from the page
+        db = [tables[1][0],tables[1][1]]   # Dados Básicos
+        pr = [tables[2][0],tables[2][1]]   # Precos Relativos
+        dre= [tables[3][0],tables[3][1]]   # DRE 12 meses
+        vol= [tables[5][0],tables[5][1]]   # Volume Diário (média 90 dias)
+        outros=[tables[6][0],tables[6][1]] # Outros Indicadores
+        namesi = db[1][0]
+        names.append(namesi)
+        print('Empresa: ',namesi)
+        tickers.append(stocks[i])
+        print('Ativo:',stocks[i])
+        pricei = float(db[1][9].replace(',','.').replace('R$ ',''))
+        price.append(pricei)
+        print('Cotação  --->',pricei)
+        try:
+            evebiti = float(pr[1][9])/100
+            evebit.append(evebiti)
+            print('EV/EBIT  --->',evebiti)
+        except ValueError:
+            evebit.append(float('nan'))
+            print('EV/EBIT --->', pr[1][9])
+            #if evebiti != float('nan'):
+        try:
+            m_ebiti = outros[1][6]#.replace('%','')#.replace('%','')
+            m_ebit.append(m_ebiti)
+            print('M. EBIT  --->',m_ebiti)
+            #else:
+        except ValueError:
+            m_ebit.append(float('nan'))
+            print('M.EBIT --->',outros[1][6])
+        voli = float(vol[1][12].replace('R$ ','').replace(',','').replace(' B','0000000').replace(' M','0000').replace(' mil','0'))
+        volume.append(voli)
+        print('Vol Med  --->', voli)
+        sit.append(db[1][3])
+        print('Situação --->',db[1][3])
+        print('\n############################################################\n')
 # build a dataframe with data from all stocks
-df=pd.DataFrame(rows, columns=header)
-# Print first 60 data frame lines
-print(df.head(60))
+rows = {'Empresa':names, 'Ticker':tickers, 'Cotação':price, 'EV/EBIT':evebit, 'M.EBIT':m_ebit, 'Volume Médio':volume, 'Situação Judicial':sit}
+df = pd.DataFrame(rows)
+# Print first 50 data frame lines
+print(df.head(50))
 # Write the data to an output csv file
-df.to_csv("output.csv",index=False)
+df.to_csv("investsite.csv",index=False)
 # Write a backup csv file with today date
 today = str(datetime.datetime.now().date())
-df.to_csv('output-' + today + ".csv",index=False)
+df.to_csv('investsite-' + today + ".csv",index=False)
+shutil.move('investsite-' + today + ".csv", '../history/investsite-' + today + ".csv")

@@ -1,7 +1,8 @@
-import pandas as pd
 from lxml import html
-import requests as req
+import pandas as pd
+import requests
 import datetime
+import shutil
 
 # Read file with stocks tickers
 def tickers(InputFile):
@@ -15,11 +16,13 @@ def tickers(InputFile):
 # Build the row with values for each stock
 def indicadores(ticker):
     # Define url to read
-    url   = req.get('https://statusinvest.com.br/acoes/'+ticker)
+    url   = requests.get('https://statusinvest.com.br/acoes/'+ticker)
     # Strips html content
     tree   = html.fromstring(url.content)
-    # Get the company name
+    # company name
     name = tree.xpath('//small/text()')[0]
+    print('Empresa: ',name)
+    print('Ativo:',ticker)
     # Stock price
     price_values = tree.xpath('//strong[@class="value"]/text()')
     # html line with values for selected stock
@@ -28,14 +31,20 @@ def indicadores(ticker):
     situacao = tree.xpath('//strong[@class="main-badge mt-1 fs-2 p-1 red accent-4"]/text()')
     # Format prices to float
     price = float(price_values[0].replace(',','.'))
+    print('Cotação  --->',price)
     # Format EV/EBIT
-    value_ebit  = indicadores_financeiros[5].replace(',','.')
+    evebit  = indicadores_financeiros[5].replace(',','.')
+    print('EV/EBIT  --->',evebit)
     # Format EBIT Margin
-    margem_ebit = indicadores_financeiros[22].replace(',','.').replace('%','')
+    m_ebit = indicadores_financeiros[22].replace(',','.').replace('%','')
+    print('M. EBIT  --->',m_ebit)
     # Format daily volume
     volume = float(price_values[7].replace('.','').replace(',','.'))
-    # Build the row with values to be appended
-    row = [name, ticker, price, value_ebit, margem_ebit, volume, situacao]
+    print('Vol Med  --->', volume)
+    print('Situação --->',situacao)
+    print('\n############################################################\n')
+    # Build a list with values to be appended
+    row = [name, ticker, price, evebit, m_ebit, volume, situacao]
     return row
 
 # Calling function to read the file
@@ -44,19 +53,18 @@ stocks = tickers('tickers.dat')#[:10]
 header = ['Empresa', 'Ticker', 'Cotação', 'EV/EBIT', 'Margem EBIT', 'Volume Diário', 'Situação']
 row=[]
 j=0
-# Appends the rows after call the function to build it
+# Appending data in a list of lists
 for i in stocks:
     j+=1
-    print('Procurando Ativo', j, i, 'no site statusinvest.com.br')
-    print('Total de ações', len(stocks))
+    print('Scraping', j, 'out of', len(stocks),'from: statusinvest.com.br')
     row.append(indicadores(i))
-    print('DONE', i)
-    print('#####################################################################')
-# Dataframe with data for all stocks
+# Build a Dataframe with all stocks data
 df=pd.DataFrame(row, columns=header)
-print(df)
+# Print first 50 data frame lines
+print(df.head(50))
 # Save data to a csv file
-df.to_csv("output.csv",index=False)
+df.to_csv("status_invest_deepvalue.csv",index=False)
 # Sava a backup with current data
 today = str(datetime.datetime.now().date())
-df.to_csv('output-' + today + ".csv",index=False)
+df.to_csv('status_invest_deepvalue-' + today + ".csv",index=False)
+shutil.move('status_invest_deepvalue-' + today + ".csv", '../history/status_invest_deepvalue-' + today + ".csv")

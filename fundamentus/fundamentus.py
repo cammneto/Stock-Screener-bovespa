@@ -1,7 +1,8 @@
+from lxml import html
 import pandas as pd
 import requests
-from lxml import html
 import datetime
+import shutil
 
 # Read file with stocks tickers
 def tickers(InputFile):
@@ -16,6 +17,7 @@ def page_tables(ticker):
     header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
     url  = 'https://fundamentus.com.br/detalhes.php?papel='+ticker
     page = requests.get(url, headers=header)
+    # Get all the tables from the html content
     for p in page:
      try:
          tables = pd.read_html(page.content)
@@ -27,7 +29,7 @@ def situacao(ticker):
     url = requests.get('https://statusinvest.com.br/acoes/'+ticker)
     tree = html.fromstring(url.content)
     situacao = tree.xpath('//strong[@class="main-badge mt-1 fs-2 p-1 red accent-4"]/text()')
-    print(situacao)
+    print('Situação --->',situacao)
     return situacao
 
 
@@ -35,7 +37,7 @@ stocks = tickers('tickers.dat')
 names,tickers,price,evebit,m_ebit,volume,sit=[],[],[],[],[],[],[]
 for i in range(len(stocks)):
     tables = page_tables(stocks[i])
-    print('Scraping',i+1, 'out', len(stocks),'from: fundamentus.com.br')
+    print('Scraping',i+1, 'out of', len(stocks),'from: fundamentus.com.br')
     if tables==None:
         print('Ativo:',stocks[i])
         print('ERR 404: STOCK NOT FOUND')
@@ -64,11 +66,14 @@ for i in range(len(stocks)):
         print('Volume Médio --->', float(tables[0][3][4].replace('.','')))
         sit.append(situacao(stocks[i]))
         print('\n############################################################\n')
+# build a dataframe with data from all stocks
 rows = {'Empresa':names, 'Ticker':tickers, 'Cotação':price, 'EV/EBIT':evebit, 'M.EBIT':m_ebit, 'Volume Médio':volume, 'Situação Judicial':sit}
 df = pd.DataFrame(rows)
+# Print first 50 data frame lines
 print(df.head(50))
 # Write the data to an output csv file
-df.to_csv("output.csv",index=False)
+df.to_csv("fundamentus.csv",index=False)
 # Write a backup csv file with today date
 today = str(datetime.datetime.now().date())
-df.to_csv('output-' + today + ".csv",index=False)
+df.to_csv('fundamentus-' + today + ".csv",index=False)
+shutil.move('fundamentus-' + today + ".csv", '../history/fundamentus-' + today + ".csv")

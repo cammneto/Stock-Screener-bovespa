@@ -42,7 +42,7 @@ df1=df1.reset_index(drop=True)
 # print first 50 stocks from lower to higher EV/EBIT on screen
 print(df1.head(40))
 # Write the data to an output csv file
-df1.to_csv("deepvalue-output.csv",index=False)
+df1.to_csv('deepvalue-investsite.csv',index=False)
 # Write a backup csv file with current date
 today = str(datetime.datetime.now().date())
-df1.to_csv('deepvalue-output-' + today + ".csv",index=False)
+df1.to_csv('deepvalue-investsite-' + today + ".csv",index=False)
