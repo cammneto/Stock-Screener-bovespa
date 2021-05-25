@@ -58,15 +58,17 @@ for i in range(len(stocks)):
         except ValueError:
             evebit.append(float('nan'))
             print('EV/EBIT --->', pr[1][9])
-            #if evebiti != float('nan'):
-        try:
-            m_ebiti = outros[1][6]#.replace('%','')#.replace('%','')
-            m_ebit.append(m_ebiti)
-            print('M. EBIT  --->',m_ebiti)
-            #else:
-        except ValueError:
-            m_ebit.append(float('nan'))
-            print('M.EBIT --->',outros[1][6])
+        #if outros[1][6]==pr[1][9]:
+        #    m_ebit=outros[1][6]
+        #else:
+        #    try:
+        #        print('M. EBIT  --->',outros[1][6])
+        #        m_ebiti = outros[1][6].replace('.','').replace(',','.').replace('%','')
+        #        m_ebit.append(m_ebiti)
+        #    except ValueError:
+        #        m_ebit.append(float('nan'))
+        print('M.EBIT --->',outros[1][6])
+        m_ebit.append(outros[1][6])
         voli = float(vol[1][12].replace('R$ ','').replace(',','').replace(' B','0000000').replace(' M','0000').replace(' mil','0'))
         volume.append(voli)
         print('Vol Med  --->', voli)

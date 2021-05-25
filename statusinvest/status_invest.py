@@ -48,7 +48,7 @@ def indicadores(ticker):
     return row
 
 # Calling function to read the file
-stocks = tickers('tickers.dat')#[:10]
+stocks = tickers('tickers.dat')#[205:]
 # Header for the data frame
 header = ['Empresa', 'Ticker', 'Cotação', 'EV/EBIT', 'Margem EBIT', 'Volume Diário', 'Situação']
 row=[]
@@ -63,8 +63,8 @@ df=pd.DataFrame(row, columns=header)
 # Print first 50 data frame lines
 print(df.head(50))
 # Save data to a csv file
-df.to_csv("status_invest_deepvalue.csv",index=False)
+df.to_csv("status_invest.csv",index=False)
 # Sava a backup with current data
 today = str(datetime.datetime.now().date())
-df.to_csv('status_invest_deepvalue-' + today + ".csv",index=False)
-shutil.move('status_invest_deepvalue-' + today + ".csv", '../history/status_invest_deepvalue-' + today + ".csv")
+df.to_csv('status_invest_-' + today + ".csv",index=False)
+shutil.move('status_invest-' + today + ".csv", '../history/status_invest_deepvalue-' + today + ".csv")
