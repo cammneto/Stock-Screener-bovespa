@@ -72,5 +72,6 @@ df.to_csv("statusinvest.csv",index=False)
 shutil.move('statusinvest.csv', 'csv/statusinvest.csv')
 # Write a backup csv file with today date
 date = str(datetime.datetime.now().date())-datetime.timedelta(days=1)
+print('data base date:', date)
 df.to_csv('statusinvest-' + date + ".csv",index=False)
 shutil.move('statusinvest-' + date + ".csv", 'csv/history/statusinvest-' + date + ".csv")

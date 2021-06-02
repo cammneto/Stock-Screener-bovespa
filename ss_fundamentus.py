@@ -83,5 +83,6 @@ df.to_csv("fundamentus.csv",index=False)
 shutil.move('fundamentus.csv', 'csv/fundamentus.csv')
 # Write a backup csv file with today date
 date = str(datetime.datetime.now().date())-datetime.timedelta(days=1)
+print('data base date:', date)
 df.to_csv('fundamentus-' + date + ".csv",index=False)
 shutil.move('fundamentus-' + date + ".csv", 'csv/history/fundamentus-' + date + ".csv")
