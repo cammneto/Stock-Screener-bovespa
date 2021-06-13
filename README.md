@@ -8,23 +8,23 @@ Use-o por sua conta e risco e não faça nenhum investimento se não souber o qu
 Para cada site temos um código separados em pastas e com exemplos dos outputs tanto do screener quanto do "deep value". Para dúvidas ou sugestões de site mande e-mail para: cammneto@gmail.com
 Sites de indicadores disponíveis:
 
-statusinvest.com.br
+[Status Invest](statusinvest.com.br)
 
-fundamentus.com.br
+[Fundamentus](fundamentus.com.br)
 
-investsite.com.br
+[Investsite](investsite.com.br)
 
-##############################################################################################
+# Stock-Screener-bovespa
 
-This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume less than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies, nor BDRs. Feel free to edit it and delete or include any desired actions.
+This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume less than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies nor BDRs. Feel free to edit it and delete or include any desired actions.
 
 Use it at your own risk and do not make any investments if you do not know what you are doing. The result of this code should not be considered an investment suggestion. The code serves only to speed up reading the data and does not replace any analysis. I am not responsible for the data contained in any of the pages used here. I created this code with a single objective, that of sharing knowledge.
 
 For each page you find a folder with its respective code and its output examples. For any doubt and/or suggestion please e-mail me: cammneto@gmail.com
 Available pages:
 
-statusinvest.com.br
+[Status Invest](statusinvest.com.br)
 
-fundamentus.com.br
+[Fundamentus](fundamentus.com.br)
 
-investsite.com.br
+[Investsite](investsite.com.br)
