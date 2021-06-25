@@ -60,7 +60,7 @@ def indicadores(ticker):
 
 stocks = tickers('tickers.dat')
 j=0
-row,names,tickers,price,evebit,m_ebit,volume,sit=([] for i in range(8))
+miss,row,names,tickers,price,evebit,m_ebit,volume,sit=([] for i in range(9))
 for i in stocks:
     j+=1
     print('Scraping', j, 'out of', len(stocks),'from: statusinvest.com.br')
