@@ -34,8 +34,8 @@ def higher_liq(df):
     df=df.sort_values(by=['Empresa','Vol.(Mi)']).reset_index(drop=True)
     for i in range(1,len(df['Empresa'])):
         if df['Empresa'][i-1]==df['Empresa'][i]:
-            remover=df['Ticker'][i-1]
-            df=df[df['Ticker'].str.contains(remover)==False]
+            remove=df['Ticker'][i-1]
+            df=df[df['Ticker'].str.contains(remove)==False]
         else:
             pass
     df=df.drop('Empresa',axis=1)
@@ -43,25 +43,3 @@ def higher_liq(df):
     df['E.Y.']=100/df['E.Y.']
     df=df.reset_index(drop=True)
     return df
-
-
-#def filter(df,drop_col):
-#    df=df.dropna().reset_index(drop=True)
-#    df.drop(df[df['Vol.(Mi)'] < 0.2].index, inplace = True)
-#    df.drop(df[df['E.Y.'] < 0].index, inplace = True)
-#    df.drop(df[df['M.EBIT'] < 0].index, inplace = True)
-#    df=df.sort_values(by=['Empresa','Vol.(Mi)']).reset_index(drop=True)
-#    for i in range(1,len(df['Empresa'])):
-#        if df['Empresa'][i-1]==df['Empresa'][i]:
-#            remover=df['Ticker'][i-1]
-#            df=df[df['Ticker'].str.contains(remover)==False]
-#        else:
-#            pass
-#    df=df.sort_values(by=['E.Y.'])
-#    df=df.reset_index(drop=True)
-#    df=df.drop(drop_col,axis=1)
-#    return df
-
-def csv_save(df,file):
-    df.to_csv("dv_"+file+".csv",index=False)
-    shutil.move('dv_'+file+'.csv', 'csv/dv_'+file+'.csv')
