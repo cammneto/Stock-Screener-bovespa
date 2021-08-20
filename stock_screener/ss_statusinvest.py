@@ -3,7 +3,6 @@ import pandas as pd
 import requests
 import datetime
 import shutil
-import numpy as np
 
 # Read file with stocks tickers
 def tickers(InputFile):
@@ -45,6 +44,10 @@ def indicadores(ticker):
         # Format EV/EBIT
         evebit  = indicadores_financeiros[5].replace(',','.')
         print('EV/EBIT  --->',evebit)
+        try:
+            print('EBIT/EV  --->',round(100/float(evebit),2),'%')
+        except ValueError:
+            print('EBIT/EV  --->', float('nan'))
         # Format EBIT Margin
         m_ebit = indicadores_financeiros[22].replace('.','').replace(',','.').replace('%','')
         print('M. EBIT  --->',m_ebit)
@@ -60,13 +63,14 @@ def indicadores(ticker):
 
 stocks = tickers('tickers.dat')
 j=0
-miss,row,names,tickers,price,evebit,m_ebit,volume,sit=([] for i in range(9))
+row, miss = [],[]
 for i in stocks:
     j+=1
     print('Scraping', j, 'out of', len(stocks),'from: statusinvest.com.br')
     row.append(indicadores(i))
 # Build a Dataframe with all stocks data
-header = ['Empresa', 'Ticker', 'Cotação', 'EV/EBIT', 'M.EBIT','Volume Médio', 'Situação']
+print("ERROR: page not found",miss)
+header = ['Empresa', 'Ticker', 'Cotação', 'EV/EBIT', 'M.EBIT', 'Volume Médio', 'Situação']
 df=pd.DataFrame(row,columns=header)
 # Print first 50 data frame lines
 print(df.head(50))

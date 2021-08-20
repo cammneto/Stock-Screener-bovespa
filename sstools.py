@@ -30,16 +30,25 @@ def ebit_margin(df):
     df.drop(df[df[18] < 0].index, inplace = True)
     return df
 
+def neg_ebit(df):
+    df.drop(df[df[3] < 0].index, inplace = True)
+    df.drop(df[df[10] < 0].index, inplace = True)
+    df.drop(df[df[17] < 0].index, inplace = True)
+    return df
+
 def higher_liq(df):
-    df=df.sort_values(by=['Empresa','Vol.(Mi)']).reset_index(drop=True)
-    for i in range(1,len(df['Empresa'])):
-        if df['Empresa'][i-1]==df['Empresa'][i]:
-            remove=df['Ticker'][i-1]
-            df=df[df['Ticker'].str.contains(remove)==False]
+    df=df.sort_values(by=[0,5]).reset_index(drop=True)
+    for i in range(1,len(df[0])):
+        if df[0][i-1]==df[0][i]:
+            remove=df[1][i-1]
+            df=df[df[1].str.contains(remove)==False]
         else:
             pass
+    return df
+
+def earning_y(df):
+    df=df.sort_values(by=['EV/EBIT'])
+    df['EV/EBIT']=df['EV/EBIT']
     df=df.drop('Empresa',axis=1)
-    df=df.sort_values(by=['E.Y.'])
-    df['E.Y.']=100/df['E.Y.']
     df=df.reset_index(drop=True)
     return df

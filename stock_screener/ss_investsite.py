@@ -26,7 +26,7 @@ def page_tables(ticker):
 
 # call stocks tickers from the file
 stocks=ticker('tickers.dat')
-miss,names,tickers,price,evebit,m_ebit,volume,sit=[],[],[],[],[],[],[],[]
+miss, names, tickers, price, evebit, m_ebit, volume, sit = ([] for i in range(8))
 for i in range(len(stocks)):
     print('Scraping',i+1, 'out of', len(stocks),'from: investsite.com.br')
     tables = page_tables(stocks[i])
@@ -83,7 +83,7 @@ for i in range(len(stocks)):
 rows = {'Empresa':names, 'Ticker':tickers, 'Cotação':price, 'EV/EBIT':evebit, 'M.EBIT':m_ebit, 'Volume Médio':volume, 'Situação':sit}
 df = pd.DataFrame(rows)
 # Print first 50 data frame lines
-print("NOT FOUND:",miss)
+print("ERROR: page not found",miss)
 print(df.head(50))
 # Write the data to an output csv file
 df.to_csv("investsite.csv",index=False)

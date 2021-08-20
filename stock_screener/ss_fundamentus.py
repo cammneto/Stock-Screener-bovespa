@@ -26,12 +26,13 @@ def page_tables(ticker):
          pass
 
 stocks = tickers('tickers.dat')
-miss,names,tickers,price,evebit,m_ebit,volume=[],[],[],[],[],[],[]
+miss, names, tickers, price, evebit, m_ebit, volume = ([] for i in range(7))
 for i in range(len(stocks)):
     tables = page_tables(stocks[i])
-    print('Scraping',i+1, 'out of', len(stocks),'from: fundamentus.com.br')
+    #print(tables)
+    print('Scraping',i+1, 'out of', len(stocks),'from fundamentus.com.br', stocks[i])
     if tables==None:
-        print('Ativo:',stocks[i])
+        #print('Ativo:',stocks[i])
         print('ERR 404: STOCK NOT FOUND')
         print('\n############################################################\n')
         names.append('NOT FOUND')
@@ -45,7 +46,7 @@ for i in range(len(stocks)):
         names.append(tables[0][1][2].replace(' ON','').replace(' PNA','').replace(' PNB','').replace(' PN','').replace(' N1','').replace(' UNT','').replace(' N2','').replace(' NM',''))
         print('Empresa:',tables[0][1][2].replace(' ON','').replace(' PNA','').replace(' PNB','').replace(' PN','').replace(' N1','').replace(' UNT','').replace(' N2','').replace(' NM',''))
         tickers.append(stocks[i])
-        print('Ativo:',stocks[i])
+        #print('Ativo:',stocks[i])
         price.append(float(tables[0][3][0])/100)
         print('Cotação --->',float(tables[0][3][0])/100)
         try:
@@ -64,7 +65,7 @@ for i in range(len(stocks)):
         print('Vol Méd  --->', float(tables[0][3][4].replace('.','')))
         print('\n############################################################\n')
 # build a dataframe with data from all stocks
-print(miss)
+print("ERROR: page not found",miss)
 rows = {'Empresa':names, 'Ticker':tickers, 'Cotação':price, 'EV/EBIT':evebit, 'M.EBIT':m_ebit, 'Volume Médio':volume}
 df = pd.DataFrame(rows)
 # Print first 50 data frame lines
