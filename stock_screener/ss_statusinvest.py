@@ -64,7 +64,7 @@ j=0
 row, miss = [],[]
 for i in stocks:
     j+=1
-    print('Scraping', i,'from: statusinvest.com.br', j, 'out of', len(stocks))
+    print('Scraping', i,'from statusinvest.com.br:', j, 'out of', len(stocks))
     row.append(indicadores(i))
 # Build a Dataframe with all stocks data
 print("ERROR: page not found",miss)
