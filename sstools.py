@@ -13,7 +13,7 @@ def csv_to_df(df):
 
 def rec_jud(df):
     df=df[df[6].str.contains('JUDICIAL')==False].reset_index(drop=True)
-    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True)
+#    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True)
     df=df.dropna().reset_index(drop=True)
     df=df.drop([6,13],axis=1)
     return df
