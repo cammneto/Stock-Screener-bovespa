@@ -12,7 +12,6 @@ def tickers(InputFile):
     for i in tickers:
         ticker.append(i[0])
     return ticker
-
 # Build the row with values for each stock
 def indicadores(ticker):
     # Define url to read
@@ -31,7 +30,6 @@ def indicadores(ticker):
         return name, ticker, price, evebit, m_ebit, volume, sit
     else:
         print('Empresa: ',name)
-        print('Ativo:',ticker)
         # Stock price
         price_values = tree.xpath('//strong[@class="value"]/text()')
         # html line with values for selected stock
@@ -66,7 +64,7 @@ j=0
 row, miss = [],[]
 for i in stocks:
     j+=1
-    print('Scraping', j, 'out of', len(stocks),'from: statusinvest.com.br')
+    print('Scraping', i,'from: statusinvest.com.br', j, 'out of', len(stocks))
     row.append(indicadores(i))
 # Build a Dataframe with all stocks data
 print("ERROR: page not found",miss)
