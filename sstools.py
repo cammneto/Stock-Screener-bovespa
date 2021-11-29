@@ -11,32 +11,29 @@ def csv_to_df(df):
     df=df.rename(columns = {'Volume Médio': 'Vol.(Mi)'}, inplace = False)
     return df
 
-def rec_jud(df):
-    df=df[df[6].str.contains('JUDICIAL')==False].reset_index(drop=True)
-#    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True)
+def rec_jud(df):#Remove empresas em recuperação judicial
+    df=df[df[6].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte statusinvest
+#    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte investsite
     df=df.dropna().reset_index(drop=True)
     df=df.drop([6,13],axis=1)
     return df
 
-def low_vol(df):
-    df.drop(df[df[5] < 0.2].index, inplace = True)
-    df.drop(df[df[12] < 0.2].index, inplace = True)
-    df.drop(df[df[19] < 0.2].index, inplace = True)
+def low_vol(df):#Remove empresas com liquidez média diária menor que R$ 200000,00
+#    df.drop(df[df[5] < 0.15].index, inplace = True) #fonte status invest (média 1 mês)
+    df.drop(df[df[12] < 0.1].index, inplace = True) #fonte investsite (média 3 meses)
+#    df.drop(df[df[19] < 0.15].index, inplace = True) #fonte fundamentus (média 2 meses)
     return df
 
-def ebit_margin(df):
-    df.drop(df[df[4] < 0].index, inplace = True)
-    df.drop(df[df[11] < 0].index, inplace = True)
-    df.drop(df[df[18] < 0].index, inplace = True)
+def neg_ebit(df):#Remove empresas com EBIT e margem EBIT negativos
+    df.drop(df[df[3] < 0].index, inplace = True) #fonte statusinvest
+    df.drop(df[df[4] < 0].index, inplace = True) #fonte statusinvest
+    df.drop(df[df[10] < 0].index, inplace = True) #fonte investsite
+    df.drop(df[df[11] < 0].index, inplace = True) #fonte investsite
+    df.drop(df[df[17] < 0].index, inplace = True) #fonte fundamentus
+    df.drop(df[df[18] < 0].index, inplace = True) #fonte fundamentus
     return df
 
-def neg_ebit(df):
-    df.drop(df[df[3] < 0].index, inplace = True)
-    df.drop(df[df[10] < 0].index, inplace = True)
-    df.drop(df[df[17] < 0].index, inplace = True)
-    return df
-
-def higher_liq(df):
+def higher_liq(df):#Organiza por empresa e liquidez removendo os tickers de menor liquidez e mesma empresa
     df=df.sort_values(by=[0,5]).reset_index(drop=True)
     for i in range(1,len(df[0])):
         if df[0][i-1]==df[0][i]:
@@ -46,7 +43,7 @@ def higher_liq(df):
             pass
     return df
 
-def earning_y(df):
+def earning_y(df): #Organiza em ordem crescente de EV/EBIT e remove a coluna com nome das empresas
     df=df.sort_values(by=['EV/EBIT'])
     df['EV/EBIT']=df['EV/EBIT']
     df=df.drop('Empresa',axis=1)

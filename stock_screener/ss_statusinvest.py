@@ -29,7 +29,10 @@ def indicadores(ticker):
         price, evebit, m_ebit, volume, sit = 5*[float('nan')]
         return name, ticker, price, evebit, m_ebit, volume, sit
     else:
-        print('Empresa: ',name)
+        if len(name)>20:
+            print('Empresa: ',name[:20])
+        else:
+            print('Empresa: ',name)
         # Stock price
         price_values = tree.xpath('//strong[@class="value"]/text()')
         # html line with values for selected stock
@@ -51,9 +54,15 @@ def indicadores(ticker):
         print('M. EBIT  --->',m_ebit)
         # Format daily volume
         if len(ticker)==6:
-            volume = float(price_values[6].replace('.','').replace(',','.'))
+            try:
+                volume = float(price_values[6].replace('.','').replace(',','.'))
+            except ValueError:
+                volume = float("nan")
         else:
-            volume = float(price_values[7].replace('.','').replace(',','.'))
+            try:
+                volume = float(price_values[7].replace('.','').replace(',','.'))
+            except ValueError:
+                volume = float("nan")
         print('Vol Méd  --->', volume)
         print('Situação --->',sit)
         print('\n############################################################\n')
@@ -74,9 +83,8 @@ df=pd.DataFrame(row,columns=header)
 print(df.head(50))
 # Write the data to an output csv file
 df.to_csv("statsinvst.csv",index=False)
-shutil.move('statsinvst.csv', 'csv/statsinvst.csv')
+shutil.copy('statsinvst.csv', 'csv/statsinvst.csv')
 # Write a backup csv file with price date
 date = str(datetime.datetime.now().date()-datetime.timedelta(days=1))
 print('data base:', date)
-df.to_csv('statsinvst-' + date + ".csv",index=False)
-shutil.move('statsinvst-' + date + ".csv", 'csv/history/statsinvst-' + date + ".csv")
+shutil.move('statsinvst.csv', 'csv/history/statusinvest/statsinvst-' + date + ".csv")

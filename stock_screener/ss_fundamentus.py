@@ -30,7 +30,7 @@ miss, names, tickers, price, evebit, m_ebit, volume = ([] for i in range(7))
 for i in range(len(stocks)):
     tables = page_tables(stocks[i])
     #print(tables)
-    print('Scraping', stocks[i],'from fundamentus.com.br', i+1, 'out of', len(stocks))
+    print('Scraping', stocks[i],'from fundamentus.com.br:', i+1, 'out of', len(stocks))
     if tables==None:
         print('ERR 404: STOCK NOT FOUND')
         print('\n############################################################\n')
@@ -70,9 +70,8 @@ df = pd.DataFrame(rows)
 print(df.head(50))
 # Write the data to an output csv file
 df.to_csv("fundaments.csv",index=False)
-shutil.move('fundaments.csv', 'csv/fundaments.csv')
+shutil.copy('fundaments.csv', 'csv/fundaments.csv')
 # Write a backup csv file with price date
 date = str(datetime.datetime.now().date()-datetime.timedelta(days=1))
 print('data base:', date)
-df.to_csv('fundaments-' + date + ".csv",index=False)
-shutil.move('fundaments-' + date + ".csv", 'csv/history/fundaments-' + date + ".csv")
+shutil.move('fundaments.csv', 'csv/history/fundamentus/fundaments-' + date + ".csv")

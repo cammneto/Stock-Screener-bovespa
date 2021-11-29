@@ -28,7 +28,7 @@ def page_tables(ticker):
 stocks=ticker('tickers.dat')
 miss, names, tickers, price, evebit, m_ebit, volume, sit = ([] for i in range(8))
 for i in range(len(stocks)):
-    print('Scraping',i+1, 'out of', len(stocks),'from: investsite.com.br')
+    print('Scraping', stocks[i],'from investsite.com.br:', i+1, 'out of', len(stocks))
     tables = page_tables(stocks[i])
     if tables==None:
         print(tables)
@@ -86,10 +86,9 @@ df = pd.DataFrame(rows)
 print("ERROR: page not found",miss)
 print(df.head(50))
 # Write the data to an output csv file
-df.to_csv("investsite.csv",index=False)
-shutil.move('investsite.csv', 'csv/investsite.csv')
-# Write a backup csv file with price date
-date = str(datetime.datetime.now().date()-datetime.timedelta(days=1))
+df.to_csv('investsite.csv',index=False) #writes to file
+shutil.copy('investsite.csv', 'csv/investsite.csv') #make a copy in the specified location
+# Write a backup csv file with date
+date = str(datetime.datetime.now().date()-datetime.timedelta(days=1)) #date defined for today -1
 print('data base:', date)
-df.to_csv('investsite-' + date + ".csv",index=False)
-shutil.move('investsite-' + date + ".csv", 'csv/history/investsite-' + date + ".csv")
+shutil.move('investsite.csv', 'csv/history/investsite/investsite-' + date + '.csv') #move original file to history path with date in name
