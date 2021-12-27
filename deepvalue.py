@@ -18,8 +18,8 @@ df=neg_ebit(df)
 df=higher_liq(df)
 
 df1,df2,df3=df.iloc[0:,:6],df.iloc[0:,6:12],df.iloc[0:,12:]
-df1,df2,df3=df1.rename(columns={0:'Empresa', 1:'Ticker', 2:'Price', 3:'EV/EBIT', 4:'M.EBIT', 5:'Vol.(Mi)'}),df2.rename(columns={7:'Empresa', 8:'Ticker', 9:'Price', 10:'EV/EBIT', 11:'M.EBIT', 12:'Vol.(Mi)'}),df3.rename(columns={14:'Empresa', 15:'Ticker', 16:'Price', 17:'EV/EBIT', 18:'M.EBIT', 19:'Vol.(Mi)'})
-df_new=pd.DataFrame({'Empresa':df[0], 'Ticker':df[1], 'Price':df[9], 'EV/EBIT':(df[3]+df[10]+df[17])/3, 'M.EBIT':(df[4]+df[11]+df[18])/3, 'Vol.(Mi)':(df[5]+df[12]+df[19])/3})
+df1,df2,df3=df1.rename(columns={0:'Empresa', 1:'Ticker', 2:'Price', 3:'EV/EBIT', 4:'M.EBIT', 5:'Vol.(Mi)1m'}),df2.rename(columns={7:'Empresa', 8:'Ticker', 9:'Price', 10:'EV/EBIT', 11:'M.EBIT', 12:'Vol.(Mi)3m'}),df3.rename(columns={14:'Empresa', 15:'Ticker', 16:'Price', 17:'EV/EBIT', 18:'M.EBIT', 19:'Vol.(Mi)2m'})
+df_new=pd.DataFrame({'Empresa':df[0], 'Ticker':df[1], 'Price':df[9], 'EV/EBIT':(df[3]+df[10]+df[17])/3, 'M.EBIT':(df[4]+df[11]+df[18])/3, 'Vol.(Mi)3m':df[12]})
 df1,df2,df3 = earning_y(df1),earning_y(df2),earning_y(df3)
 df_new = earning_y(df_new)
 ### OUTPUT Files ####
@@ -28,26 +28,26 @@ df2.to_csv   ("dv_investsite.csv",index=False), shutil.move('dv_investsite.csv',
 df3.to_csv   ("dv_fundaments.csv",index=False), shutil.move('dv_fundaments.csv', 'csv/dv_fundaments.csv')
 df_new.to_csv("dv_df-average.csv",index=False), shutil.move('dv_df-average.csv', 'csv/dv_df-average.csv')
 #### OUTPUT SCREEN ####
-rank = pd.concat([df1.iloc[0:,[0,2]], df2.iloc[0:,[0,2]], df3.iloc[0:,[0,2]]], axis=1)#, df_new.iloc[0:,[0,2,1,4]]
+rank = pd.concat([df1.iloc[0:,[0,2,4]], df2.iloc[0:,[0,2,4]], df3.iloc[0:,[0,2,4]]], axis=1)#, df_new.iloc[0:,[0,2,1,4]]
 rank.index = rank.index +1
-print('--||-------------------||-------------------||-------------------|')
-print('  ||   Status Invest   ||    Investsite     ||    Fundamentus    |')#'|                Average                |')
-print('--||-------------------||-------------------||-------------------|')#' ----------------------------------------')
+print('--||---------------------------------||---------------------------------||---------------------------------|')
+print('  ||          Status Invest          ||           Investsite            ||           Fundamentus           |')#'|                Average                |')
+print('--||---------------------------------||---------------------------------||---------------------------------|')#' ----------------------------------------')
 print(tabulate(rank.head(20), headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
-print('--||-------------------||-------------------||-------------------|')#' ----------------------------------------')
+print('--||---------------------------------||---------------------------------||---------------------------------|')#' ----------------------------------------')
 print(tabulate(rank[20:30], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
-print('--||-------------------||-------------------||-------------------|')#' ----------------------------------------')
+print('--||---------------------------------||---------------------------------||---------------------------------|')#' ----------------------------------------')
 print(tabulate(rank[30:40], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
 
 rank = df_new.iloc[0:,[0,2,1,4]]
 rank.index = rank.index +1
-print('|-------------------------------------------|')
-print('|                  Average                  |')
-print('|-------------------------------------------|')
+print('|---------------------------------------------|')
+print('|                   Average                   |')
+print('|---------------------------------------------|')
 print(tabulate(rank.head(20), headers='keys', floatfmt=".2f"))
-print('|-------------------------------------------|')
+print('|---------------------------------------------|')
 print(tabulate(rank[20:30], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
-print('|-------------------------------------------|')
+print('|---------------------------------------------|')
 print(tabulate(rank[30:40], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
 
 
