@@ -1,4 +1,13 @@
 __pycache__
 tests/
 tickers (copy).dat
-csv/*
+csv
+csv/dv_df-average.csv
+csv/dv_investsite.csv
+csv/fundaments.csv
+csv/investsite.csv
+csv/dv_fundaments.csv
+csv/dv_statsinvst.csv
+csv/history
+csv/statsinvst.csv
+
