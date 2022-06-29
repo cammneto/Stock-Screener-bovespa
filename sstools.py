@@ -12,16 +12,16 @@ def csv_to_df(df):
     return df
 
 def rec_jud(df):#Remove empresas em recuperação judicial
-    df=df[df[6].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte statusinvest
-#    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte investsite
+#    df=df[df[6].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte statusinvest
+    df=df[df[13].str.contains('JUDICIAL')==False].reset_index(drop=True) #fonte investsite
     df=df.dropna().reset_index(drop=True)
     df=df.drop([6,13],axis=1)
     return df
 
 def low_vol(df):#Remove empresas com liquidez média diária menor que R$ 200000,00
-#    df.drop(df[df[5] < 0.15].index, inplace = True) #fonte status invest (média 1 mês)
-    df.drop(df[df[12] < 0.1].index, inplace = True) #fonte investsite (média 3 meses)
-#    df.drop(df[df[19] < 0.15].index, inplace = True) #fonte fundamentus (média 2 meses)
+#    df.drop(df[df[5] < 0.2].index, inplace = True) #fonte status invest (média 1 mês)
+    df.drop(df[df[12] < 0.2].index, inplace = True) #fonte investsite (média 3 meses)
+#    df.drop(df[df[19] < 0.2].index, inplace = True) #fonte fundamentus (média 2 meses)
     return df
 
 def neg_ebit(df):#Remove empresas com EBIT e margem EBIT negativos
