@@ -1,6 +1,6 @@
 # Stock-Screener-bovespa
 
-Este código coleta dados de ações selecionadas da Bovespa e faz uma análise baseada na "deep value investing", criada por Benjamin Graham (mentor de Warren Buffett) explicada no livro The Intelligent Investor, muito utilizada pelo próprio Buffett e por Walter Schloss, dois dos maiores investidores de todos os tempos. O código clasifica as ações por EV/EBIT em ordem crescente e exclui margem EBIT negativa e volume financeiro menor q 200 mil.
+Este código coleta dados de ações selecionadas da Bovespa e faz uma análise baseada na "deep value investing", criada por Benjamin Graham (mentor de Warren Buffett) explicada no livro The Intelligent Investor, muito utilizada pelo próprio Buffett e por Walter Schloss, dois dos maiores investidores de todos os tempos. O código clasifica as ações por EV/EBIT em ordem crescente e exclui margem EBIT negativa e volume financeiro menor que 200 mil.
 O arquivo de entrada (tickers.dat) que contém os tickers de ações não tem ações financeiras como bancos e seguradoras, nem BDRs. Sinta-se à vontade para editá-lo e excluir ou incluir qualquer ação desejada.
 
 Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código apenas com o objetivo de compartilhar o conhecimento.
