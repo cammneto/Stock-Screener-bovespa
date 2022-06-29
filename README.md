@@ -16,7 +16,7 @@ Sites de indicadores disponíveis:
 
 # Stock-Screener-bovespa
 
-This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume less than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies nor BDRs. Feel free to edit it and delete or include any desired actions.
+This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume lower than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies nor BDRs. Feel free to edit it and delete or include any desired stocks.
 
 Use it at your own risk and do not make any investments if you do not know what you are doing. The result of this code should not be considered an investment suggestion. The code serves only to speed up reading the data and does not replace any analysis. I am not responsible for the data contained in any of the pages used here. I created this code with a single objective, that of sharing knowledge.
 
