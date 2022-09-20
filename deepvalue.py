@@ -13,7 +13,8 @@ else:
 
 df=pd.concat([df1,df2,df3],axis=1, ignore_index=True)
 df=rec_jud(df)
-df=low_vol(df)
+vol = float(input('Digite o limite de volume médio de transação diário em milhões de R$ (ex: para R$ 500mil digite 0.5)'))
+df=low_vol(df,vol)
 df=neg_ebit(df)
 df=higher_liq(df)
 
