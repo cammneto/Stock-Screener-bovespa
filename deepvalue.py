@@ -49,6 +49,6 @@ print(tabulate(rank.head(20), headers='keys', floatfmt=".2f"))
 print('|---------------------------------------------|')
 print(tabulate(rank[20:30], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
 print('|---------------------------------------------|')
-print(tabulate(rank[30:40], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
+print(tabulate(rank[30:], headers='keys', floatfmt=".2f"))#, tablefmt='plain'))
 
 
