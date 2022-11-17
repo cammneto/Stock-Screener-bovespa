@@ -3,7 +3,7 @@ from tabulate import tabulate
 from sstools import *
 
 df1 = csv_to_df('csv/statsinvst.csv')
-df2 = csv_to_df('csv/investsite.csv')
+#df2 = csv_to_df('csv/investsite.csv')
 df3 = csv_to_df('csv/fundaments.csv')
 
 if len(df1)==len(df3)==len(df3):
@@ -19,7 +19,7 @@ df=neg_ebit(df)
 df=higher_liq(df)
 
 df1,df2,df3=df.iloc[0:,:6],df.iloc[0:,6:12],df.iloc[0:,12:]
-df1,df2,df3=df1.rename(columns={0:'Empresa', 1:'Ticker', 2:'Price', 3:'EV/EBIT', 4:'M.EBIT', 5:'Vol.(Mi)1m'}),df2.rename(columns={7:'Empresa', 8:'Ticker', 9:'Price', 10:'EV/EBIT', 11:'M.EBIT', 12:'Vol.(Mi)3m'}),df3.rename(columns={14:'Empresa', 15:'Ticker', 16:'Price', 17:'EV/EBIT', 18:'M.EBIT', 19:'Vol.(Mi)2m'})
+df1,df2,df3=df1.rename(columns={0:'Empresa', 1:'Ticker', 2:'Price', 3:'EV/EBIT', 4:'M.EBIT', 5:'Vol.(Mi)1m'}),df3.rename(columns={7:'Empresa', 8:'Ticker', 9:'Price', 10:'EV/EBIT', 11:'M.EBIT', 12:'Vol.(Mi)3m'}),df3.rename(columns={14:'Empresa', 15:'Ticker', 16:'Price', 17:'EV/EBIT', 18:'M.EBIT', 19:'Vol.(Mi)2m'})
 df_new=pd.DataFrame({'Empresa':df[0], 'Ticker':df[1], 'Price':df[9], 'EV/EBIT':(df[3]+df[10]+df[17])/3, 'M.EBIT':(df[4]+df[11]+df[18])/3, 'Vol.(Mi)3m':df[12]})
 df1,df2,df3 = earning_y(df1),earning_y(df2),earning_y(df3)
 df_new = earning_y(df_new)

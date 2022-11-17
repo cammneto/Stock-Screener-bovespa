@@ -15,7 +15,8 @@ def ticker(InputFile):
 # Scrap data from url
 def page_tables(ticker):
     url = 'https://www.investsite.com.br/principais_indicadores.php?cod_negociacao='+ticker
-    page = requests.get(url)
+    header={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0', 'Referer':url}
+    page = requests.get(url,headers=header)
     # Get all the tables from the html content
     for p in page:
      try:

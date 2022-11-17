@@ -15,9 +15,11 @@ def tickers(InputFile):
 # Build the row with values for each stock
 def indicadores(ticker):
     # Define url to read
-    url   = requests.get('https://statusinvest.com.br/acoes/'+ticker)
+    url = 'https://statusinvest.com.br/acoes/'+ticker
+    header={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0', 'Referer':url}
+    req   = requests.get(url,headers=header)
     # Strips html content
-    tree   = html.fromstring(url.content)
+    tree   = html.fromstring(req.content)
     # company name
     name = tree.xpath('//small/text()')[0]
     if name =='RESUMO DO DIA':

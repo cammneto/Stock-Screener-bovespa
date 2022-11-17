@@ -1,5 +1,12 @@
 import pandas as pd
-import shutil
+
+def tickers(InputFile):
+    infile = open(InputFile, "r")
+    tickers = [line.split() for line in infile]
+    ticker = []
+    for i in tickers:
+        ticker.append(i[0])
+    return ticker
 
 def csv_to_df(df):
     # Convert to numeric to turn strings into nan
