@@ -9,7 +9,7 @@ def tickers(InputFile):
     return ticker
 
 def csv_to_df(df):
-    # Convert to numeric to turn strings into nan
+    # Converte os dados de strings pra float
     df = pd.read_csv(df)
     df['Cotação'] = df['Cotação'].apply(pd.to_numeric, errors='coerce')
     df['EV/EBIT'] = round(df['EV/EBIT'].apply(pd.to_numeric, errors='coerce'),2)
@@ -26,9 +26,9 @@ def rec_jud(df):#Remove empresas em recuperação judicial
     return df
 
 def low_vol(df,vol):#Remove empresas com liquidez média diária menor que R$ 200000,00
-#    df.drop(df[df[5] < 0.2].index, inplace = True) #fonte status invest (média 1 mês)
-    df.drop(df[df[12] < vol].index, inplace = True) #fonte investsite (média 3 meses)
+#    df.drop(df[df[5] < 0.2].index, inplace = True)  #fonte status invest (média 1 mês)
 #    df.drop(df[df[19] < 0.2].index, inplace = True) #fonte fundamentus (média 2 meses)
+    df.drop(df[df[12] < vol].index, inplace = True) #fonte investsite (média 3 meses)
     return df
 
 def neg_ebit(df):#Remove empresas com EBIT e margem EBIT negativos
@@ -40,7 +40,7 @@ def neg_ebit(df):#Remove empresas com EBIT e margem EBIT negativos
     df.drop(df[df[18] < 0].index, inplace = True) #fonte fundamentus
     return df
 
-def higher_liq(df):#Organiza por empresa e liquidez removendo os tickers de menor liquidez e mesma empresa
+def higher_liq(df):#Organiza por empresa e liquidez removendo os tickers de menor liquidez de uma mesma empresa
     df=df.sort_values(by=[0,5]).reset_index(drop=True)
     for i in range(1,len(df[0])):
         if df[0][i-1]==df[0][i]:
@@ -50,7 +50,7 @@ def higher_liq(df):#Organiza por empresa e liquidez removendo os tickers de meno
             pass
     return df
 
-def earning_y(df): #Organiza em ordem crescente de EV/EBIT e remove a coluna com nome das empresas
+def earnings_yield(df): #Organiza em ordem crescente de EV/EBIT (ivnerso do eranings yield) e remove a coluna com nome das empresas pra facilitar a visialização na tela
     df=df.sort_values(by=['EV/EBIT'])
     df['EV/EBIT']=df['EV/EBIT']
     df=df.drop('Empresa',axis=1)
