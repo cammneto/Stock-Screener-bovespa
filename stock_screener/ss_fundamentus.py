@@ -49,13 +49,11 @@ for i in range(len(stocks)):
         print('Cotação --->',float(tables[0][3][0])/100)
         try:
             evebit.append(float(tables[2][3][10].replace('.',''))/100)
-            print('EV/EBIT  --->',float(tables[2][3][10].replace('.',''))/100)
         except ValueError:
             evebit.append(float('nan'))
-            print('EV/EBIT  --->',tables[2][3][10])
+        print('EV/EBIT  --->',tables[2][3][10])
         try:
             m_ebit.append(float(tables[2][5][4].replace(',','.').replace('%','')))
-            print('M. EBIT  --->',tables[2][5][4].replace(',','.').replace('%',''))
         except ValueError:
             m_ebit.append(float('nan'))
         print('M. EBIT  --->',tables[2][5][4].replace(',','.').replace('%',''))
