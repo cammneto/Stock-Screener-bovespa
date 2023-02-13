@@ -28,8 +28,11 @@ def page_tables(ticker):
 stocks = tickers('tickers.dat')
 miss, names, tickers, price, evebit, m_ebit, volume = ([] for i in range(7))
 for i in range(len(stocks)):
-    tables = page_tables(stocks[i])
-    #print(tables)
+    if stocks[i]=="WIZC3":
+        stocks[i]="WIZS3"
+        tables = page_tables(stocks[i])
+    else:
+        tables = page_tables(stocks[i])
     print('Scraping', stocks[i],'from fundamentus.com.br:', i+1, 'out of', len(stocks))
     if tables==None:
         print('ERR 404: STOCK NOT FOUND')
