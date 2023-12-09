@@ -21,7 +21,7 @@ def indicadores(ticker):
     # Strips html content
     tree   = html.fromstring(req.content)
     # company name
-    name = tree.xpath('//small/text()')[0]
+    name = tree.xpath('//small/text()')[2]
     if name =='RESUMO DO DIA':
         print('Empresa: NOT FOUND')
         print('Ativo:',ticker)
@@ -47,10 +47,6 @@ def indicadores(ticker):
         # Format EV/EBIT
         evebit  = indicadores_financeiros[5].replace(',','.')
         print('EV/EBIT  --->',evebit)
-        try:
-            print('EBIT/EV  --->',round(100/float(evebit),2),'%')
-        except ValueError:
-            print('EBIT/EV  --->', float('nan'))
         # Format EBIT Margin
         m_ebit = indicadores_financeiros[22].replace('.','').replace(',','.').replace('%','')
         print('M. EBIT  --->',m_ebit)

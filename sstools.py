@@ -26,8 +26,8 @@ def rec_jud(df):#Remove empresas em recuperação judicial
     return df
 
 def low_vol(df,vol):#Remove empresas com liquidez média diária menor que R$ 200000,00
-#    df.drop(df[df[5] < 0.2].index, inplace = True)  #fonte status invest (média 1 mês)
-#    df.drop(df[df[19] < 0.2].index, inplace = True) #fonte fundamentus (média 2 meses)
+#    df.drop(df[df[5] < vol].index, inplace = True)  #fonte status invest (média 1 mês)
+#    df.drop(df[df[19] < vol].index, inplace = True) #fonte fundamentus (média 2 meses)
     df.drop(df[df[12] < vol].index, inplace = True) #fonte investsite (média 3 meses)
     return df
 
