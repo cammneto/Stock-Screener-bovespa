@@ -97,6 +97,6 @@ print(df.head(50))
 df.to_csv('investsite.csv',index=False) #writes to file
 shutil.copy('investsite.csv', 'csv/investsite.csv') #make a copy in the specified location
 # Write a backup csv file with date
-date = str(datetime.datetime.now().date()-datetime.timedelta(days=1)) #date defined for today -1
+date = str(datetime.datetime.now().date()-datetime.timedelta(days=2)) #date defined for today -1
 print(f'data base: {date}')
 shutil.move('investsite.csv', 'csv/history/investsite/investsite-' + date + '.csv') #move original file to history path with date in name

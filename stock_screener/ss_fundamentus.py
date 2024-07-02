@@ -80,6 +80,6 @@ print(df.head(50))
 df.to_csv("fundaments.csv",index=False)
 shutil.copy('fundaments.csv', 'csv/fundaments.csv')
 # Write a backup csv file with price date
-date = str(datetime.datetime.now().date()-datetime.timedelta(days=1))
+date = str(datetime.datetime.now().date()-datetime.timedelta(days=2))
 print('data base:', date)
 shutil.move('fundaments.csv', 'csv/history/fundamentus/fundaments-' + date + ".csv")
