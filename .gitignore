@@ -1,0 +1,9 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# History and log files
+csv/history/*
+csv/*.csv
+logs/*
+
+stock_screener.sh
