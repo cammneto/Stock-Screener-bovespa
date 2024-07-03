@@ -6,4 +6,6 @@ csv/history/*
 csv/*.csv
 logs/*
 
+# Local files
 stock_screener.sh
+tickers.dat
