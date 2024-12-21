@@ -1,30 +1,43 @@
-# Stock-Screener-bovespa
+# Brazilian Stock Market Data Scraper
 
-Este código coleta dados de ações selecionadas da Bovespa e faz uma análise baseada na "deep value investing", criada por Benjamin Graham (mentor de Warren Buffett) explicada no livro The Intelligent Investor, muito utilizada pelo próprio Buffett e por Walter Schloss, dois dos maiores investidores de todos os tempos. O código clasifica as ações por EV/EBIT em ordem crescente e exclui margem EBIT negativa e volume financeiro menor que 200 mil.
-O arquivo de entrada (tickers.dat) que contém os tickers de ações não tem ações financeiras como bancos e seguradoras, nem BDRs. Sinta-se à vontade para editá-lo e excluir ou incluir qualquer ação desejada.
+This repository contains Python scripts designed to scrape and aggregate financial data for all stocks listed on the Brazilian stock exchange (B3) from four reliable platforms: **Status Invest**, **InvestSite**, **Investidor10**, and **Fundamentus**. These scripts use web scraping techniques to collect key stock indicators and export them to structured CSV files for analysis.
 
-Use-o por sua conta e risco e não faça nenhum investimento se não souber o que está fazendo. O resultado deste código não deve ser considerado sugestão de investimento. O código serve apenas para agilizar a leitura dos dados e não substituir nenhuma análise. Não sou responsável pelos dados contidos em qualquer uma das páginas aqui utilizadas. Criei este código apenas com o objetivo de compartilhar o conhecimento.
+## Features
+- **Multi-Source Data Aggregation**: Consolidates financial and operational metrics from multiple trusted sources.
+- **Automated Sitemap Parsing**: Dynamically identifies stock-specific pages from each platform’s sitemap.
+- **Customizable and Scalable**: Easily extendable to include additional platforms or tailor data points to your needs.
+- **CSV Export**: Outputs data in clean, date-stamped CSV files for easy integration with analytics tools.
 
-Para cada site temos um código separados em pastas e com exemplos dos outputs tanto do screener quanto do "deep value". Para dúvidas ou sugestões de site mande e-mail para: cammneto@gmail.com
-Sites de indicadores disponíveis:
+## Repository Structure
+### Shared Utilities
+- **`scraper_tools.py`**
+  - Provides core functions for:
+    - Fetching HTML content using `requests`.
+    - Parsing stock data using `BeautifulSoup`.
+    - Saving results to CSV files with accurate date-stamping.
+  - Handles platform-specific scraping logic using modular parsing functions.
 
-[Status Invest](statusinvest.com.br)
+### Platform-Specific Scrapers
+1. **`scraper_statusinvst.py`**
+   - Scrapes data from [Status Invest](https://statusinvest.com.br).
+   - Parses the sitemap to identify stock pages and extracts detailed financial data.
 
-[Fundamentus](fundamentus.com.br)
+2. **`scraper_investsite.py`**
+   - Scrapes key metrics from [InvestSite](https://www.investsite.com.br).
+   - Uses the sitemap to dynamically discover stock-specific pages.
 
-[Investsite](investsite.com.br)
+3. **`scraper_investidor10.py`**
+   - Collects data from [Investidor10](https://investidor10.com.br).
+   - Maps stock tickers from Status Invest to their respective pages on Investidor10.
 
-# Stock-Screener-bovespa
+4. **`scraper_fundamentus.py`**
+   - Scrapes key metrics from [Fundamentus](https://fundamentus.com.br)
+   - Uses the sitemap to dynamically discover stock-specific pages.
 
-This code collects data on selected Bovespa shares and makes an analysis based on "deep value investing", created by Benjamin Graham (Warren Buffett's mentor) explained in the book The Intelligent Investor, widely used by Buffett himself and by Walter Schloss, two of greatest investors of all time. The code classifies the shares by EV / EBIT in ascending order and excludes negative EBIT margin and financial volume lower than 200 thousand. The input file (tickers.dat) that contains the stock tickers has no financial stocks like banks and insurance companies nor BDRs. Feel free to edit it and delete or include any desired stocks.
+## How to Use
+1. Clone the repository.
+2. Install required libraries (requests, BeautifulSoup, pandas).
+3. Run the individual scripts to fetch data from the respective platforms.
+4. Find the generated CSV files with aggregated stock information in the current working directory.
 
-Use it at your own risk and do not make any investments if you do not know what you are doing. The result of this code should not be considered an investment suggestion. The code serves only to speed up reading the data and does not replace any analysis. I am not responsible for the data contained in any of the pages used here. I created this code with a single objective, that of sharing knowledge.
-
-For each page you find a folder with its respective code and its output examples. For any doubt and/or suggestion please e-mail me: cammneto@gmail.com
-Available pages:
-
-[Status Invest](statusinvest.com.br)
-
-[Fundamentus](fundamentus.com.br)
-
-[Investsite](investsite.com.br)
+Note: This project adheres to the respective websites' terms of service and is intended for educational purposes. Always ensure compliance with local laws and ethical web scraping practices.
