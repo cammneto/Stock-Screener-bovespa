@@ -8,7 +8,7 @@ base_url = "https://statusinvest.com.br/acoes/"
 url_to_scrape = 'https://investidor10.com.br/acoes/'
 
 # Fetch all stocks pages from sitemap
-tickers_urls = [url for url in parse_sitemap(sitemap_url, base_url) if "page" not in url]
+tickers = [url for url in parse_sitemap(sitemap_url, base_url) if "page" not in url]
 tickers_urls = [url_to_scrape+ticker.split('acoes/')[-1] for ticker in tickers_urls]
 
 # Scrape stocks data
