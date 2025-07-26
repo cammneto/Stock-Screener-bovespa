@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from statistics import mode
-from datetime import datetime
+from datetime import datetime,date, timedelta
 
 def fetch_html(url):
     """Fetch the HTML content of a given URL."""
@@ -75,9 +75,11 @@ def scrape_stock_data(tickers_urls,split_parameter):
     return all_stocks_data
 
 def save_to_csv(data_list, database_name):
-    """Save scraped data to a CSV file."""
+    """
+    Save scraped data to a CSV file with price date in the filename.
+    """
     df = pd.DataFrame(data_list)
-    if 'Data da Cotação' in df.columns: # Writes date in filename if df has a price date column 
+    if 'Data da Cotação' in df.columns: 
         price_date = mode(df['Data da Cotação']) # get the most common date as the most recent price date
         YMD_date = datetime.strptime(price_date,'%d/%m/%Y').strftime('%Y-%m-%d') # format date to be Y-m-d
         file_name = YMD_date+'_'+database_name+'.csv'
@@ -86,7 +88,17 @@ def save_to_csv(data_list, database_name):
         YMD_date = datetime.strptime(price_date,'%d/%m/%Y').strftime('%Y-%m-%d') # format date to be Y-m-d
         file_name = YMD_date+'_'+database_name+'.csv'
     else:
-        today = str(datetime.now().date()) # Get today date
+        weekday = date.today().weekday()
+        print(f'weekday {weekday+1}')
+        if weekday == 5:
+            print("today is saturday")
+            today = str(date.today() - timedelta(days=1))
+        elif weekday == 6:
+            print("today is sunday")
+            today = str(date.today() - timedelta(days=2))
+        else:
+            today = str(date.today())
+        print('database date {today}')
         file_name = today+'_'+database_name+'.csv' # Writes today date in filename in case price date is not present in the dataframe
     df.to_csv(file_name, index=False)
     print(f"\nData saved to ---> {file_name}\n")
