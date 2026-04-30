@@ -1,13 +1,4 @@
-beautifulsoup4==4.14.3
 bs4==0.0.2
-certifi==2026.4.22
-charset-normalizer==3.4.7
-idna==3.13
-numpy==2.4.4
 pandas==3.0.2
 python-dateutil==2.9.0.post0
 requests==2.33.1
-six==1.17.0
-soupsieve==2.8.3
-typing_extensions==4.15.0
-urllib3==2.6.3
